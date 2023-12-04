@@ -1376,7 +1376,10 @@ export default class ApiRequest extends LitElement {
                 }
               } else {
                 const vals = (el.value && Array.isArray(el.value)) ? el.value.join(',') : '';
-                formUrlParams.append(el.dataset.pname, vals);
+
+                if (vals.length > 0) {
+                  formUrlParams.append(el.dataset.pname, vals);
+                }
               }
             });
           fetchOptions.body = formUrlParams;
@@ -1391,7 +1394,7 @@ export default class ApiRequest extends LitElement {
             } else if (el.value) {
               formDataParams.append(el.dataset.pname, el.value);
             }
-          } else if (el.value && Array.isArray(el.value)) {
+          } else if (el.value && Array.isArray(el.value) && el.value.length > 0) {
             formDataParams.append(el.dataset.pname, el.value.join(','));
           }
         });
